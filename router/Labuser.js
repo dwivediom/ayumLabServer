@@ -1,5 +1,7 @@
 import { Router } from "express"
+import Labuser from "../modle/Labuser.js"
 import User from "../modle/Labuser.js"
+import jwt_decode from "jwt-decode"
 
 const router = Router()
 
@@ -15,7 +17,8 @@ router.post("/add", async (req, res) => {
         name :req.body.data.name,
         email_verified :req.body.data.email_verified,
         picture :req.body.data.picture ,
-         sub:req.body.data.sub
+         sub:req.body.data.sub,
+        
     }
      const newuser  =  new User(userData)
     await  newuser.save()
@@ -39,5 +42,22 @@ router.get("/data", async (req,res)=>{
    }
 })
 
+router.post("/userdata" , async (req,res)=>{ 
+
+    try{ 
+           let jwtdata= jwt_decode( req.body.jwt)
+          
+       
+        const userData = await Labuser.findOne({sub:jwtdata.sub}); 
+      
+        
+            return res.json(userData)
+            
+    }catch(error){ 
+       
+      console.log(error.message)
+      res.status(400).json(error.message)
+    }
+} )
 
 export default router 

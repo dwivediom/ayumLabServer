@@ -1,11 +1,12 @@
 
-
-
+import * as dotenv from "dotenv"
+dotenv.config()
 import multer from "multer"
 import {GridFsStorage} from "multer-gridfs-storage"
 
 import monogourl from "../database/key.js"
-const url = monogourl;
+
+const url = process.env.MONGO_URL ;
 
 const storage = new GridFsStorage({
     url:url , 

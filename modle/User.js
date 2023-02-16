@@ -1,16 +1,31 @@
 import mongoose from "mongoose";
+const Schema = mongoose.Schema;
+ 
+const UserSchema= new mongoose.Schema({
 
-const LabuserSchema = mongoose.Schema({
-    sub:{ 
-        type :String
-    },
     name: {
         type: String,
         required: true
     },
+    phone: {
+        type: String,
+        
+    },
     email: {
         type: String,
-        required: true
+        required:true 
+
+    },
+    password: {
+        type: String,
+        required: false
+    },
+    avatar: {
+        type: String,
+    },
+    sub:{ 
+        type :String,
+        required:true 
     },
     email_verified: {
         type: Boolean,
@@ -18,11 +33,7 @@ const LabuserSchema = mongoose.Schema({
     },
     picture: {
         type: String,
-        required: true
-    },
-    userType:{
-         type:String, 
-         default:"Lab" 
+       
     },
     recentChat:[
         {  sub:{ 
@@ -44,11 +55,14 @@ const LabuserSchema = mongoose.Schema({
             type: String,
             required: true
         },}
-    ]
-         
-    
+    ],
+date: { 
+    type: Date, 
+     default: Date.now, 
+} 
 
-})
 
-const Labuser = mongoose.model("labuser",LabuserSchema)
-export default Labuser
+});
+
+const User= mongoose.model('Users' , UserSchema);
+export default User

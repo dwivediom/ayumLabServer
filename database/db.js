@@ -1,9 +1,11 @@
 import mongoose from "mongoose"
 import  monogourl  from "./key.js"
+import * as dotenv from 'dotenv'
+dotenv.config()
 
  const dbconnection = async()=>{ 
      try {
-       await  mongoose.connect( monogourl,{
+       await  mongoose.connect( process.env.MONGO_URL,{
         useNewUrlParser: true,
         useUnifiedTopology: true
       })

@@ -1,5 +1,6 @@
 import Conversation from "../modle/Conversation.js";
 import { Router } from "express";
+import Labuser from "../modle/Labuser.js";
 
 const router = Router() ; 
 
@@ -19,6 +20,18 @@ router.post("/set",async(req,res)=>{
     }) 
      console.log(" set converstaion is running ")
      await  newconversation.save()
+      
+      const  senderData = await Labuser.findOne({sub:senderId})
+      const   reciverData = await Labuser.findOne({sub:reciverId})
+      
+
+      senderData.recentChat.push(reciverData)
+      reciverData.recentChat.push(senderData)
+
+      await senderData.save() 
+      await reciverData.save()
+      
+       
 
      res.status(200).json(conversation)
 
