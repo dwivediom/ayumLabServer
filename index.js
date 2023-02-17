@@ -3,11 +3,10 @@ import dbconnection from './database/db.js';
 import cors from "cors"
 import bodyParser from "body-parser"
 import labuser from "./router/Labuser.js"
-import patients from "./router/patients.js"
 import conversation from "./router/conversation.js"
 import  message from "./router/message.js"
-import  doctor from "./router/doctors.js"
 import  uploadfiles from "./router/uploadfiles.js"
+import  search from "./router/search.js"
 
 
 
@@ -21,8 +20,7 @@ app.use(cors())
 app.use(bodyParser.json({extended:true}))
 app.use(bodyParser.urlencoded({extended:true }))
 
-app.use("/doctor",doctor)
-app.use("/patients",patients)
+app.use("/search" , search)
 app.use( "/user",labuser)
 app.use("/conversation", conversation)
 app.use("/message", message)

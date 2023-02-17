@@ -60,4 +60,20 @@ router.post("/userdata" , async (req,res)=>{
     }
 } )
 
+
+router.post("/update" ,  async(req, res)=>{ 
+     try{ 
+       const { name ,picture } =req.body; 
+      let jwtdata= jwt_decode( req.body.jwt)
+            const data ={ name , picture }
+          const userData = await Labuser.findOneAndUpdate({sub:jwtdata.sub} ,data, {new:true} ); 
+          return res.json({msg:"data is updated "})
+          
+     }catch(error){ 
+        console.log(error.message)
+       return res.json({error : error.message})
+     }
+})
+
+
 export default router 
