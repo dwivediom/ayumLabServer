@@ -26,7 +26,7 @@ conn.once('open' ,()=>{
 const router = Router()
 router.post("/upload" , uploadFile.single("file"), async (req, res)=> { 
     try{ 
-     let url = "http://localhost:8000"
+     let url = "https://www.chatserver.ayum.in"
      if(!req.file){ 
        return res.status(400).json("file not found")
      }
