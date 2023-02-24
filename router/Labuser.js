@@ -61,11 +61,28 @@ router.post("/userdata" , async (req,res)=>{
 } )
 
 
+router.post("/recentchat" ,  async (req, res)=>{ 
+   try{
+    let jwtdata= jwt_decode( req.body.jwt)
+    const userData = await Labuser.findOne({sub:jwtdata.sub}); 
+  
+    const recentchat = await Labuser.find( {id : {$in:userData.recentchat}}).select("-recentChat")
+    return res.status(200).json(recentchat)
+   }catch(error){ 
+     console.log(error.message)
+     return res.status(400).json(error.message)
+   }
+   
+  
+
+})
+
+
 router.post("/update" ,  async(req, res)=>{ 
      try{ 
-       const { name ,picture } =req.body; 
+       const { name ,picture, endpoint , p256dh , auth  } =req.body; 
       let jwtdata= jwt_decode( req.body.jwt)
-            const data ={ name , picture }
+            const data ={ name , picture , endpoint , p256dh , auth }
           const userData = await Labuser.findOneAndUpdate({sub:jwtdata.sub} ,data, {new:true} ); 
           return res.json({msg:"data is updated "})
           

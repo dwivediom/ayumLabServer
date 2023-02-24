@@ -24,27 +24,16 @@ const LabuserSchema = mongoose.Schema({
          type:String, 
          default:"Lab" 
     },
-    recentChat:[
-        {  sub:{ 
-            type :String
-        },
-        name: {
-            type: String,
-            required: true
-        },
-        email: {
-            type: String,
-            required: true
-        },
-        email_verified: {
-            type: Boolean,
-            required: true
-        },
-        picture: {
-            type: String,
-            required: true
-        },}
-    ]
+    endpoint:{
+         type:String
+    }, 
+    p256dh:{
+        type:String
+    }, 
+    auth:{ 
+         type:String
+    },
+    recentChat:[ ]
          
     
 

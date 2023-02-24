@@ -7,7 +7,7 @@ import conversation from "./router/conversation.js"
 import  message from "./router/message.js"
 import  uploadfiles from "./router/uploadfiles.js"
 import  search from "./router/search.js"
-
+import  webpush from "./router/webpush.js"
 
 
 const app = express() 
@@ -25,6 +25,7 @@ app.use( "/user",labuser)
 app.use("/conversation", conversation)
 app.use("/message", message)
 app.use("/file", uploadfiles)
+app.use("/webpush",webpush)
 
 
 app.listen( port , ()=>{ 
