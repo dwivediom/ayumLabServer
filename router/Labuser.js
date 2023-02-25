@@ -65,14 +65,14 @@ router.post("/recentchat" ,  async (req, res)=>{
    try{
     let jwtdata= jwt_decode( req.body.jwt)
     const userData = await Labuser.findOne({sub:jwtdata.sub}); 
-  
-    const recentchat = await Labuser.find( {_id : {$in:userData.recentchat}}).select("-recentChat")
+      
+    const recentchat = await Labuser.find( {_id:{$in:userData.recentChat}}).select("-recentChat")
     return res.status(200).json(recentchat)
    }catch(error){ 
      console.log(error.message)
      return res.status(400).json(error.message)
    }
-   
+
   
 
 })
