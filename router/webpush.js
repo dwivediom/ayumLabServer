@@ -41,8 +41,8 @@ const subscription = {
 };
 
 const data = {
-  title: 'Ayum chat ',
-  body: `You have a new message form ${req.body.sender} `,
+  title: ` new message form ${req.body.sender} `,
+  body:  req.body.message,
    actions: [
         { action: 'explore', title: 'Explore' },
         { action: 'close', title: 'Close' }
