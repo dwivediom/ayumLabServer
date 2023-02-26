@@ -9,7 +9,7 @@ import monogourl from "../database/key.js"
 const url = process.env.MONGO_URL ;
 
 const storage = new GridFsStorage({
-    url:url , 
+    url:url ,   
     options:{useUnifiedTopology:true , useNewUrlParser:true }, 
     file:(req, file )=>{ 
 
