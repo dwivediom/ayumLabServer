@@ -24,7 +24,7 @@ router.post("/add", async (req, res) => {
     const newuser = new User(userData)
     await newuser.save()
     console.log(req.body.data.email)
-    res.json("woriing")
+    return res.status(200).json("user added ")
 
   } catch (err) {
     console.log(err.message)
@@ -67,7 +67,7 @@ router.post("/recentchat", async (req, res) => {
     let jwtdata = jwt_decode(req.body.jwt)
     const userData = await Labuser.findOne({ sub: jwtdata.sub });
     const chatconversation = await Conversation.find({ _id: { $in: userData.recentChat } }).limit(10).sort({ "updatedAt": -1 })
-    console.log("chat conversation ", chatconversation)
+   
    
     let recentusers = [];
     chatconversation.map(user => {
@@ -94,7 +94,7 @@ router.post("/recentchat", async (req, res) => {
       { $sort: { __order: 1 } }
     ]);
   
-   console.log("recentuserdata",user)
+   
     return res.status(200).json(user)
   } catch (error) {
     console.log(error.message)

@@ -5,7 +5,8 @@ import  uploadFile from "../utils/upload.js";
 const router  = Router() ; 
 
 var Limit = -10 ; 
-var skip = -3 ; 
+var skip = -10  ; 
+var skipnitial = 10 
 
 router.post("/add" ,async(req,res)=>{ 
      try{ 
@@ -37,9 +38,9 @@ router.post("/add" ,async(req,res)=>{
 router.get("/get/:conversationId",async(req, res)=>{
 
     try{ 
-      skip = -10 ; 
+      skip = -10  ; skipnitial = 10 ; 
       const  message = await Conversation.findOne({_id:req.params.conversationId} , {message: {$slice: Limit } } )
-      console.log("is running ", message.message) 
+      
       return res.status(200).json(message.message)
         
     }catch(err){ 
@@ -56,9 +57,17 @@ router.get("/get/:conversationId",async(req, res)=>{
 router.get("/oldmsg/:conversationId", async (req,res)=>{ 
    
   try{ 
-    skip = skip -10;  
+     if(skip === 0){ return res.status(200).json([]) }
+      
+    skip = skip - skipnitial;  
+   
     const  message = await Conversation.findOne({_id:req.params.conversationId} , {message: {$slice: [skip , 10]} } ); 
-    console.log("is old running " , message) 
+     let  val = message.__v +skip 
+     if(  message.__v+skip <= 0 ){ 
+        skip = 0 ; 
+        skipnitial=0 ; 
+     }
+   
     return res.status(200).json(message.message)
       
   }catch(err){ 
