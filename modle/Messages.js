@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const messageSchema  = mongoose.Schema({ 
   
     conversationId:{ 
-        type:String , 
+        type: mongoose.Schema.Types.ObjectId,  
+        ref:"conversation" 
     }, 
     senderId:{ 
          type:String
@@ -11,6 +12,7 @@ const messageSchema  = mongoose.Schema({
     reciverId:{ 
         type : String 
     }, 
+
     text : { 
         type : String  
     }, 
