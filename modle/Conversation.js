@@ -4,13 +4,7 @@ const ConversationSchema = mongoose.Schema({
     members: {
         type: Array
     },
-    members_id: [
-        {
-            member_id: {
-                 type : mongoose.Schema.Types.ObjectId, 
-                 ref:"labuser"
-            }
-        }],
+    
     message: [
         {
             conversationId:{ 

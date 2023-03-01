@@ -6,19 +6,19 @@ const LabuserSchema = mongoose.Schema({
     },
     name: {
         type: String,
-        required: true
+       
     },
     email: {
         type: String,
-        required: true
+        
     },
     email_verified: {
         type: Boolean,
-        required: true
+        
     },
     picture: {
         type: String,
-        required: true
+       
     },
     userType:{
          type:String, 

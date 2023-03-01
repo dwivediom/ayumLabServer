@@ -23,10 +23,11 @@ router.post("/set",async(req,res)=>{
       console.log(conversationId)
       const  senderData = await Labuser.findOne({sub:senderId})
       const   reciverData = await Labuser.findOne({sub:reciverId})
-      
+       
+       console.log( "data",senderData , reciverData)
 
-      senderData.recentChat.push(conversationId._id)
-      reciverData.recentChat.push(conversationId._id)
+     await  senderData.recentChat.push(conversationId._id)
+     await  reciverData.recentChat.push(conversationId._id)
 
       await senderData.save() 
       await reciverData.save()
