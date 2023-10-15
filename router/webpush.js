@@ -11,8 +11,6 @@ router.post("/notify", async (req,res)=>{
    
 try{
 
-console.log('Public key:', publicKey);
-console.log('Private key:', privateKey);
 
 const publicVapidKey = publicKey; // Replace with your own public key
 const privateVapidKey =  privateKey; // Replace with your own private key
@@ -41,14 +39,14 @@ const subscription = {
 };
 
 const data = {
-  title: ` new message form ${req.body.sender} `,
+  title: ` new message from ${req.body.sender} `,
   body:  req.body.message,
    actions: [
         { action: 'explore', title: 'Explore' },
         { action: 'close', title: 'Close' }
       ]
 };
-console.log(subscription)
+c
 sendNotification(subscription, data);
  
   return res.status(200).json({subscription})

@@ -19,11 +19,11 @@ router.post("/add", async (req, res) => {
       email_verified: req.body.data.email_verified,
       picture: req.body.data.picture,
       sub: req.body.data.sub,
-
+      
     }
     const newuser = new User(userData)
     await newuser.save()
-    console.log(req.body.data.email)
+
     return res.status(200).json("user added ")
 
   } catch (err) {
@@ -108,10 +108,11 @@ router.post("/recentchat", async (req, res) => {
 
 router.post("/update", async (req, res) => {
   try {
-    const { name, picture, endpoint, p256dh, auth } = req.body;
+    const { name, picture, endpoint, p256dh, auth, FCMtoken } = req.body;
     let jwtdata = jwt_decode(req.body.jwt)
-    const data = { name, picture, endpoint, p256dh, auth }
+    const data = { name, picture, endpoint, p256dh, auth, FCMtoken }
     const userData = await Labuser.findOneAndUpdate({ sub: jwtdata.sub }, data, { new: true });
+    console.log("fcm",name ,": ",FCMtoken , )
     return res.json({ msg: "data is updated " })
 
   } catch (error) {

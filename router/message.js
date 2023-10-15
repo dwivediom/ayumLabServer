@@ -11,7 +11,7 @@ var skipnitial = 10
 router.post("/add" ,async(req,res)=>{ 
      try{ 
 
-       console.log("messange route ", req.body.senderId)
+  
      const  message = { 
           conversationId : req.body.conversationId,
           senderId : req.body.senderId, 

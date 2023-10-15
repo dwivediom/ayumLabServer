@@ -8,23 +8,23 @@ router.post("/set",async(req,res)=>{
     try{ 
         const senderId = req.body.data.SenderId  
         const reciverId = req.body.data.ReciverId 
-         console.log( "set",req.body)
+        
      const conversation = await Conversation.findOne({members:{$all:[senderId , reciverId]}})
        if(conversation){ 
-        console.log(" set converstaion is running 1")
+    
          return res.json({"msg":"conversation is already exist "});
        }
 
     const   newconversation = new Conversation( { 
            members:[senderId,reciverId]
     }) 
-     console.log(" set converstaion is running ")
+   
      const conversationId =  await  newconversation.save()
-      console.log(conversationId)
+     
       const  senderData = await Labuser.findOne({sub:senderId})
       const   reciverData = await Labuser.findOne({sub:reciverId})
        
-       console.log( "data",senderData , reciverData)
+  
 
      await  senderData.recentChat.push(conversationId._id)
      await  reciverData.recentChat.push(conversationId._id)
@@ -37,7 +37,7 @@ router.post("/set",async(req,res)=>{
      res.status(200).json(conversation)
 
     }catch(err){ 
-        console.log("/setconverstaion api backend ",err.message)
+    
         res.status(400).json(err.message)
     }
 })

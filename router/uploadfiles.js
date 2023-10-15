@@ -30,7 +30,7 @@ router.post("/upload" , uploadFile.single("file"), async (req, res)=> {
      if(!req.file){ 
        return res.status(400).json("file not found")
      }
-     console.log( '33 upload.js', req.file)
+    
      const imageurl = `${url}/file/get/${req.file.filename}`
        res.status(200).json(imageurl)
     }catch(err){ 
@@ -42,7 +42,7 @@ router.post("/upload" , uploadFile.single("file"), async (req, res)=> {
 router.get("/get/:filename", async(req, res)=>{ 
    try{ 
      const file = await gfs.files.findOne({filename:req.params.filename}); 
-     console.log(file)
+  
      const readStream = gridfsbuket.openDownloadStream(file._id); 
      readStream.pipe(res);  
 

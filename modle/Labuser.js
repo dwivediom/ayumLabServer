@@ -33,6 +33,9 @@ const LabuserSchema = mongoose.Schema({
     auth:{ 
          type:String
     },
+    FCMtoken:{
+        type : String
+    },
     recentChat:[ ]
          
     
